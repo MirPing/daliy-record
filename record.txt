@@ -17,12 +17,26 @@ https://archive.org/web/web.php 可以查看目标网站之前的静态页面
         基于带宽耗尽型的dns反弹式拒绝服务攻击
     DNS欺骗
 
-Recon-ng 是一种信息收集工具，使用许多不同的来源收集数据，比如google，twitter，shodan
+Recon-ng 是一种信息收集工具，由python编写的开源工具，使用许多不同的来源收集数据，比如google，twitter，shodan
+Recon-ng是查询搜索引擎、众多社交工具和API的包装器媒体，通过互联网档案和数据库，以获取有关网站、网络信息、应用程序、服务器、主机、用户、电子邮件地址等。它的工作原理是整合不同功能的模块，例如Google、Twitter、LinkedIn或Shodan等，或者对DNS服务器执行查询。
+它还具有将结果导入数据库或生成各种格式报告的功能，例如HTML，MS Excel或CSV。
 
+识别web防火墙(WAF)
+    nmap --script=http-waf-detect,http-waf-fingerprint
+    wafw00f kali中用于检测waf防火墙存在的工具
+    
+识别HTTPS加密参数
+    nmap --script=ssl-enum-ciphers
+    sslscan
+    testssl
 
+利用robots.txt
 
+使用DirBuster 寻找敏感文件和目录 通过暴力或者表单进行来发现Web服务器中现有文件和目录 可以自定义路径文件
 
+zap和burpsuite类似
 
+    
 
 
 
@@ -39,5 +53,42 @@ Recon-ng 是一种信息收集工具，使用许多不同的来源收集数据�
 
 fenqile.com
 
+80/tcp  open  http     Tengine httpd
+|_http-csrf: Couldn't find any CSRF vulnerabilities.
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+|_http-passwd: ERROR: Script execution failed (use -d to debug)
+| http-server-header: 
+|   Tengine
+|_  stgw/1.3.9_1.13.5
+|_http-stored-xss: Couldn't find any stored XSS vulnerabilities.
+443/tcp open  ssl/http Tengine httpd
+| http-csrf: 
+| Spidering limited to: maxdepth=3; maxpagecount=20; withinhost=www.fenqile.com
+|   Found the following possible CSRF vulnerabilities: 
+|     
+|     Path: https://chong.fenqile.com:443/phone/charge.html?_FTAG=55B7331-7EBED7E
+|     Form id: charge_form
+|     Form action: #
+|     
+|     Path: https://mall.fenqile.com:443/category/city_index.html?_DTAG=931A331-B56BF85
+|     Form id: search_form
+|     Form action: //mall.fenqile.com/category/city_goods_search.html
+|     
+|     Path: https://chong.fenqile.com:443/flow/charge.html?_FTAG=BCE9331-B14AD73
+|     Form id: charge_form
+|     Form action: #
+|     
+|     Path: https://chong.fenqile.com:443/game/charge/S201605250204535.html?_FTAG=1C0A331-6CF5D8C
+|     Form id: recharge_form
+|_    Form action: #
+|_http-dombased-xss: Couldn't find any DOM based XSS.
+| http-enum: 
+|   /robots.txt: Robots file
+|_  /user/: Potentially interesting folder
 
+SWEET32 (CVE-2016-2183, CVE-2016-6329)    VULNERABLE, uses 64 bit block ciphers
+LOGJAM (CVE-2015-4000), experimental      not vulnerable (OK): no DH EXPORT ciphers, no DH key detected with <= TLS 1.2
+ BEAST (CVE-2011-3389)                     TLS1: ECDHE-RSA-AES128-SHA ECDHE-RSA-AES256-SHA AES128-SHA AES256-SHA CAMELLIA256-SHA CAMELLIA128-SHA ECDHE-RSA-DES-CBC3-SHA DES-CBC3-SHA 
+                                           VULNERABLE -- but also supports higher protocols  TLSv1.1 TLSv1.2 (likely mitigated)
+ LUCKY13 (CVE-2013-0169), experimental     potentially VULNERABLE, uses cipher block chaining (CBC) ciphers with TLS. Check patches
 
