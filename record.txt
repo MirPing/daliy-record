@@ -1,0 +1,43 @@
+https://www.cnblogs.com/7089fy/category/1345791.html
+kali linux web渗透测试手册(第二版)
+
+被动信息收集: 指在不影响目标系统的前提下获得信息，比如搜索引擎，数据库缓存灯第三方机构
+
+dig: Domain Information Groper 域名信息挖掘工具
+https://archive.org/web/web.php 可以查看目标网站之前的静态页面
+
+常见的DNS攻击:
+    域名劫持
+        dns服务器地址被劫持(路由器配置被修改，主机hosts文件被修改灯)
+        入侵dns服务器，修改其中的数据库记录(大多数是内鬼)
+    缓存投毒
+        攻击者仿冒权威名字服务器向缓存dns服务器发送伪造应答包，力争抢先完成应答以污染dns缓存
+    DDOS攻击
+        基于主机耗尽型的dns查询拒绝服务攻击
+        基于带宽耗尽型的dns反弹式拒绝服务攻击
+    DNS欺骗
+
+Recon-ng 是一种信息收集工具，使用许多不同的来源收集数据，比如google，twitter，shodan
+
+
+
+
+
+
+
+
+
+
+
+
+
+*.lexinfintech.com
+*.fenqile.com
+*.fenqile.cn
+*.juzilicai.com
+*.dszc-amc.com
+
+fenqile.com
+
+
+
