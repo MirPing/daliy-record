@@ -88,7 +88,75 @@ fenqile.com
 
 SWEET32 (CVE-2016-2183, CVE-2016-6329)    VULNERABLE, uses 64 bit block ciphers
 LOGJAM (CVE-2015-4000), experimental      not vulnerable (OK): no DH EXPORT ciphers, no DH key detected with <= TLS 1.2
- BEAST (CVE-2011-3389)                     TLS1: ECDHE-RSA-AES128-SHA ECDHE-RSA-AES256-SHA AES128-SHA AES256-SHA CAMELLIA256-SHA CAMELLIA128-SHA ECDHE-RSA-DES-CBC3-SHA DES-CBC3-SHA 
+BEAST (CVE-2011-3389)                     TLS1: ECDHE-RSA-AES128-SHA ECDHE-RSA-AES256-SHA AES128-SHA AES256-SHA CAMELLIA256-SHA CAMELLIA128-SHA ECDHE-RSA-DES-CBC3-SHA DES-CBC3-SHA 
                                            VULNERABLE -- but also supports higher protocols  TLSv1.1 TLSv1.2 (likely mitigated)
- LUCKY13 (CVE-2013-0169), experimental     potentially VULNERABLE, uses cipher block chaining (CBC) ciphers with TLS. Check patches
+LUCKY13 (CVE-2013-0169), experimental     potentially VULNERABLE, uses cipher block chaining (CBC) ciphers with TLS. Check patches
+
+
+
+
+手机app安全
+
+移动app面临的威胁:
+    木马，病毒，篡改，破解，钓鱼
+    二次打包，账号窃取，资源篡改，广告植入，信息劫持
+    
+Snap_v2.1.8_apkpure.com.apk 测试数据
+
+安卓app安全测试
+安装包测试
+    1.反编译(代码是否有混淆，是否有敏感信息灯)
+    2.关于签名 jarsigner -verify -verbose -certs apk 校验签名使用的key是否正确
+    3.完整性校验(校验文件的md5值)
+    4.权限设置检查(结合需求判断manifest文件中的权限是否为必须，不是则需移除)
+敏感信息测试
+    cookie类数据，注意过期时间
+    是否有日志信息
+    配置文件
+软键盘劫持
+账户安全
+    密码存储
+    密码传输
+    账户锁定(暴力破解)
+    弱密码限制
+    注销机制
+数据通信安全
+组件安全测试
+    drozer工具
+服务端接口测试
+
+activity组件是一个负责与用户交互的组件
+
+
+
+Android安全机制来源于Linux，并且以Linux权限管理为基础，Android的创新之处是在
+Linux用户权限管理的基础之上创建了Android进程的沙箱隔离机制。
+
+问: linux 权限管理模型？
+问: android 应用加固
+在android中，一个用户id标识一个应用程序。对于普通的应用程序，GID等于UID。
+GIDS是由框架在Application安装过程中生成，与Application申请的具体权限相关，即GIDS是关于
+允许或限制应用程序访问设备资源的。Android使用沙箱的概念来实现应用程序之间的分离和权限。
+
+Android Permission 机制
+APK签名是android安全的第一道防线，android系统在安装APK的时候，首先会校验APK的签名，如果发现签名文件不存在或者校验签名失败，则会拒绝安装。
+签名过程:
+    遍历APK包中所有文件，对非文件夹，非签名文件的文件，逐个生成SHA256数字摘要信息，再用Base64进行编码，之后生成的数字摘要信息写入manifest.mf文件。
+    对生成的manifest.mf数字摘要信息，使用SHA256-RSA算法，用私钥进行签名，写入到cert.sf
+    把公钥和锁采用的加密算法保存到cert.rsa中。
+AndroidManifest.xml 配置文件中权限选项
+
+android安全机制:
+进程沙箱隔离机制
+应用程序签名机制
+权限声明机制
+访问控制机制
+进程通信机制
+内存管理机制 基于linux的低内存管理机制，设计实现了独特的LMK，将进程重要性分级，分组，当内存不足时，自动清理级别进程所占用的内存空间。
+
+
+
+
+
+
 
